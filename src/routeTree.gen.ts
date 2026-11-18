@@ -10,33 +10,145 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as PainelRouteImport } from './routes/painel'
+import { Route as CBotIdRouteImport } from './routes/c.$botId'
+import { Route as PainelIndexRouteImport } from './routes/painel.index'
+import { Route as ApiPublicChatRouteImport } from './routes/api/public/chat'
+import { Route as CBotIdIndexRouteImport } from './routes/c.$botId.index'
+import { Route as CBotIdThreadIdRouteImport } from './routes/c.$botId.$threadId'
+import { Route as PainelTesteIndexRouteImport } from './routes/painel.teste.index'
+import { Route as PainelTesteThreadIdRouteImport } from './routes/painel.teste.$threadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EntrarRoute = EntrarRouteImport.update({
+  id: '/entrar',
+  path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelRoute = PainelRouteImport.update({
+  id: '/painel',
+  path: '/painel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CBotIdRoute = CBotIdRouteImport.update({
+  id: '/c/$botId',
+  path: '/c/$botId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelIndexRoute = PainelIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PainelRoute,
+} as any)
+const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
+  id: '/api/public/chat',
+  path: '/api/public/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CBotIdIndexRoute = CBotIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CBotIdRoute,
+} as any)
+const CBotIdThreadIdRoute = CBotIdThreadIdRouteImport.update({
+  id: '/$threadId',
+  path: '/$threadId',
+  getParentRoute: () => CBotIdRoute,
+} as any)
+const PainelTesteIndexRoute = PainelTesteIndexRouteImport.update({
+  id: '/teste/',
+  path: '/teste/',
+  getParentRoute: () => PainelRoute,
+} as any)
+const PainelTesteThreadIdRoute = PainelTesteThreadIdRouteImport.update({
+  id: '/teste/$threadId',
+  path: '/teste/$threadId',
+  getParentRoute: () => PainelRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/entrar': typeof EntrarRoute
+  '/painel': typeof PainelRouteWithChildren
+  '/c/$botId': typeof CBotIdRouteWithChildren
+  '/painel/': typeof PainelIndexRoute
+  '/api/public/chat': typeof ApiPublicChatRoute
+  '/c/$botId/$threadId': typeof CBotIdThreadIdRoute
+  '/painel/teste/$threadId': typeof PainelTesteThreadIdRoute
+  '/c/$botId/': typeof CBotIdIndexRoute
+  '/painel/teste/': typeof PainelTesteIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/entrar': typeof EntrarRoute
+  '/painel': typeof PainelIndexRoute
+  '/api/public/chat': typeof ApiPublicChatRoute
+  '/c/$botId/$threadId': typeof CBotIdThreadIdRoute
+  '/painel/teste/$threadId': typeof PainelTesteThreadIdRoute
+  '/c/$botId': typeof CBotIdIndexRoute
+  '/painel/teste': typeof PainelTesteIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/entrar': typeof EntrarRoute
+  '/painel': typeof PainelRouteWithChildren
+  '/c/$botId': typeof CBotIdRouteWithChildren
+  '/painel/': typeof PainelIndexRoute
+  '/api/public/chat': typeof ApiPublicChatRoute
+  '/c/$botId/$threadId': typeof CBotIdThreadIdRoute
+  '/painel/teste/$threadId': typeof PainelTesteThreadIdRoute
+  '/c/$botId/': typeof CBotIdIndexRoute
+  '/painel/teste/': typeof PainelTesteIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/entrar'
+    | '/painel'
+    | '/c/$botId'
+    | '/painel/'
+    | '/api/public/chat'
+    | '/c/$botId/$threadId'
+    | '/painel/teste/$threadId'
+    | '/c/$botId/'
+    | '/painel/teste/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/entrar'
+    | '/painel'
+    | '/api/public/chat'
+    | '/c/$botId/$threadId'
+    | '/painel/teste/$threadId'
+    | '/c/$botId'
+    | '/painel/teste'
+  id:
+    | '__root__'
+    | '/'
+    | '/entrar'
+    | '/painel'
+    | '/c/$botId'
+    | '/painel/'
+    | '/api/public/chat'
+    | '/c/$botId/$threadId'
+    | '/painel/teste/$threadId'
+    | '/c/$botId/'
+    | '/painel/teste/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EntrarRoute: typeof EntrarRoute
+  PainelRoute: typeof PainelRouteWithChildren
+  CBotIdRoute: typeof CBotIdRouteWithChildren
+  ApiPublicChatRoute: typeof ApiPublicChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +160,106 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/entrar': {
+      id: '/entrar'
+      path: '/entrar'
+      fullPath: '/entrar'
+      preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel': {
+      id: '/painel'
+      path: '/painel'
+      fullPath: '/painel'
+      preLoaderRoute: typeof PainelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/c/$botId': {
+      id: '/c/$botId'
+      path: '/c/$botId'
+      fullPath: '/c/$botId'
+      preLoaderRoute: typeof CBotIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel/': {
+      id: '/painel/'
+      path: '/'
+      fullPath: '/painel/'
+      preLoaderRoute: typeof PainelIndexRouteImport
+      parentRoute: typeof PainelRoute
+    }
+    '/api/public/chat': {
+      id: '/api/public/chat'
+      path: '/api/public/chat'
+      fullPath: '/api/public/chat'
+      preLoaderRoute: typeof ApiPublicChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/c/$botId/': {
+      id: '/c/$botId/'
+      path: '/'
+      fullPath: '/c/$botId/'
+      preLoaderRoute: typeof CBotIdIndexRouteImport
+      parentRoute: typeof CBotIdRoute
+    }
+    '/c/$botId/$threadId': {
+      id: '/c/$botId/$threadId'
+      path: '/$threadId'
+      fullPath: '/c/$botId/$threadId'
+      preLoaderRoute: typeof CBotIdThreadIdRouteImport
+      parentRoute: typeof CBotIdRoute
+    }
+    '/painel/teste/': {
+      id: '/painel/teste/'
+      path: '/teste'
+      fullPath: '/painel/teste/'
+      preLoaderRoute: typeof PainelTesteIndexRouteImport
+      parentRoute: typeof PainelRoute
+    }
+    '/painel/teste/$threadId': {
+      id: '/painel/teste/$threadId'
+      path: '/teste/$threadId'
+      fullPath: '/painel/teste/$threadId'
+      preLoaderRoute: typeof PainelTesteThreadIdRouteImport
+      parentRoute: typeof PainelRoute
+    }
   }
 }
 
+interface PainelRouteChildren {
+  PainelIndexRoute: typeof PainelIndexRoute
+  PainelTesteThreadIdRoute: typeof PainelTesteThreadIdRoute
+  PainelTesteIndexRoute: typeof PainelTesteIndexRoute
+}
+
+const PainelRouteChildren: PainelRouteChildren = {
+  PainelIndexRoute: PainelIndexRoute,
+  PainelTesteThreadIdRoute: PainelTesteThreadIdRoute,
+  PainelTesteIndexRoute: PainelTesteIndexRoute,
+}
+
+const PainelRouteWithChildren =
+  PainelRoute._addFileChildren(PainelRouteChildren)
+
+interface CBotIdRouteChildren {
+  CBotIdThreadIdRoute: typeof CBotIdThreadIdRoute
+  CBotIdIndexRoute: typeof CBotIdIndexRoute
+}
+
+const CBotIdRouteChildren: CBotIdRouteChildren = {
+  CBotIdThreadIdRoute: CBotIdThreadIdRoute,
+  CBotIdIndexRoute: CBotIdIndexRoute,
+}
+
+const CBotIdRouteWithChildren =
+  CBotIdRoute._addFileChildren(CBotIdRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EntrarRoute: EntrarRoute,
+  PainelRoute: PainelRouteWithChildren,
+  CBotIdRoute: CBotIdRouteWithChildren,
+  ApiPublicChatRoute: ApiPublicChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
