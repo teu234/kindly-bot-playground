@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Bot config lives in `public.bots` (owner-only RLS); public visitors read it only through server code (`getPublicBot`, `/api/public/chat`) using the admin client — never grant anon on `bots`.
+- Conversation threads are stored in the visitor's browser localStorage (scopes `public:<botId>` and `test:<botId>`), with route-based thread IDs (`/c/$botId/$threadId`, `/painel/teste/$threadId`) — chosen by the user; no server-side transcript storage.
+- AI replies stream from `/api/public/chat` via Lovable AI Gateway Responses; the system prompt is built in `src/lib/prompt.ts`.
